@@ -1,0 +1,175 @@
+local TweenService = game:GetService("TweenService")
+local UIS = game:GetService("UserInputService")
+
+local Gui = Instance.new("ScreenGui", game.CoreGui)
+
+-- MAIN
+local Main = Instance.new("Frame", Gui)
+Main.Size = UDim2.new(0,0,0,0)
+Main.Position = UDim2.new(0.5,0,0.5,0)
+Main.BackgroundColor3 = Color3.fromRGB(10,10,10)
+Main.BorderSizePixel = 0
+Instance.new("UICorner", Main)
+
+TweenService:Create(Main, TweenInfo.new(0.3), {
+	Size = UDim2.new(0,420,0,320),
+	Position = UDim2.new(0.5,-210,0.5,-160)
+}):Play()
+
+-- RGB STROKE
+local Stroke = Instance.new("UIStroke", Main)
+Stroke.Thickness = 2
+
+spawn(function()
+	while true do
+		for i = 0,1,0.01 do
+			Stroke.Color = Color3.fromHSV(i,1,1)
+			wait(0.03)
+		end
+	end
+end)
+
+-- TITLE
+local Title = Instance.new("TextLabel", Main)
+Title.Size = UDim2.new(1,-60,0,50)
+Title.Position = UDim2.new(0,15,0,0)
+Title.Text = "🔥 TIKTOK:Fungjayy"
+Title.Font = Enum.Font.GothamBlack
+Title.TextSize = 26
+Title.TextColor3 = Color3.new(1,1,1)
+Title.BackgroundTransparency = 1
+Title.TextXAlignment = Enum.TextXAlignment.Left
+
+-- CLOSE
+local Close = Instance.new("TextButton", Main)
+Close.Size = UDim2.new(0,34,0,34)
+Close.Position = UDim2.new(1,-45,0,8)
+Close.Text = "X"
+Close.Font = Enum.Font.GothamBlack
+Close.TextSize = 18
+Close.BackgroundColor3 = Color3.fromRGB(40,40,40)
+Close.TextColor3 = Color3.new(1,1,1)
+Instance.new("UICorner", Close)
+
+Close.MouseEnter:Connect(function()
+	TweenService:Create(Close, TweenInfo.new(0.15), {
+		BackgroundColor3 = Color3.fromRGB(80,80,80),
+		Size = UDim2.new(0,38,0,38)
+	}):Play()
+end)
+
+Close.MouseLeave:Connect(function()
+	TweenService:Create(Close, TweenInfo.new(0.15), {
+		BackgroundColor3 = Color3.fromRGB(40,40,40),
+		Size = UDim2.new(0,34,0,34)
+	}):Play()
+end)
+
+Close.MouseButton1Click:Connect(function()
+	Gui:Destroy()
+end)
+
+-- LIST
+local List = Instance.new("Frame", Main)
+List.Size = UDim2.new(1,-20,1,-60)
+List.Position = UDim2.new(0,10,0,50)
+List.BackgroundTransparency = 1
+
+local UIList = Instance.new("UIListLayout", List)
+UIList.Padding = UDim.new(0,10)
+
+-- CREATE SCRIPT BUTTON
+local function CreateScript(name, url)
+	local Item = Instance.new("Frame", List)
+	Item.Size = UDim2.new(1,0,0,50)
+	Item.BackgroundColor3 = Color3.fromRGB(20,20,20)
+	Instance.new("UICorner", Item)
+
+	local Name = Instance.new("TextLabel", Item)
+	Name.Size = UDim2.new(0.6,0,1,0)
+	Name.Position = UDim2.new(0,10,0,0)
+	Name.Text = name
+	Name.Font = Enum.Font.GothamBold
+	Name.TextSize = 18
+	Name.TextColor3 = Color3.new(1,1,1)
+	Name.BackgroundTransparency = 1
+	Name.TextXAlignment = Enum.TextXAlignment.Left
+
+	local Run = Instance.new("TextButton", Item)
+	Run.Size = UDim2.new(0,60,0,40)
+	Run.Position = UDim2.new(1,-70,0.5,-20)
+	Run.Text = "▶"
+	Run.Font = Enum.Font.GothamBlack
+	Run.TextSize = 22
+	Run.BackgroundColor3 = Color3.fromRGB(25,25,25)
+	Run.TextColor3 = Color3.fromRGB(255,255,255)
+	Instance.new("UICorner", Run)
+
+	-- HOVER
+	Run.MouseEnter:Connect(function()
+		TweenService:Create(Run, TweenInfo.new(0.15), {
+			BackgroundColor3 = Color3.fromRGB(70,70,70),
+			TextColor3 = Color3.fromRGB(0,255,200)
+		}):Play()
+	end)
+
+	Run.MouseLeave:Connect(function()
+		TweenService:Create(Run, TweenInfo.new(0.15), {
+			BackgroundColor3 = Color3.fromRGB(25,25,25),
+			TextColor3 = Color3.fromRGB(255,255,255)
+		}):Play()
+	end)
+
+	-- CLICK (หมุน + หาย + รัน)
+	Run.MouseButton1Click:Connect(function()
+		local rotate = TweenService:Create(Run, TweenInfo.new(0.3), {
+			Rotation = 360
+		})
+		rotate:Play()
+
+		Run.Text = "loading"
+
+		wait(0.3)
+
+		Gui:Destroy()
+		loadstring(game:HttpGet(url))()
+	end)
+end
+
+-- 
+CreateScript("Quantum HUB *EASTER*🥚", "loadstring(game:HttpGet("https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"))()"
+CreateScript("Trade Scam", "loadstring(game:HttpGet("https://raw.githubusercontent.com/panumas13119/Dds/refs/heads/main/dupe"))()"
+CreateScript("RedZ HUB", "local Settings = {
+  JoinTeam = "Pirates"; -- Pirates/Marines
+  Translator = true; -- true/false
+}
+loadstring(game:HttpGet("https://raw.githubusercontent.com/PlockScripts/newredz/refs/heads/main/Remake-version.luau"))(Settings)"
+
+-- DRAG
+local dragging, dragStart, startPos
+
+Main.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		dragStart = input.Position
+		startPos = Main.Position
+	end
+end)
+
+Main.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+
+UIS.InputChanged:Connect(function(input)
+	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		local delta = input.Position - dragStart
+		Main.Position = UDim2.new(
+			startPos.X.Scale,
+			startPos.X.Offset + delta.X,
+			startPos.Y.Scale,
+			startPos.Y.Offset + delta.Y
+		)
+	end
+end)
