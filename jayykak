@@ -1,0 +1,194 @@
+-- KEY
+local CorrectKey = "tiktokfungjayy7706276"
+
+local TweenService = game:GetService("TweenService")
+local UIS = game:GetService("UserInputService")
+
+local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+
+-- ================= KEY UI =================
+local Frame = Instance.new("Frame", ScreenGui)
+Frame.Size = UDim2.new(0,380,0,260)
+Frame.Position = UDim2.new(0.5,-190,0.5,-130)
+Frame.BackgroundColor3 = Color3.fromRGB(15,15,15)
+Instance.new("UICorner", Frame)
+
+local Stroke = Instance.new("UIStroke", Frame)
+Stroke.Thickness = 2
+
+spawn(function()
+	while true do
+		for i=0,1,0.01 do
+			Stroke.Color = Color3.fromHSV(i,1,1)
+			task.wait(0.03)
+		end
+	end
+end)
+
+-- TITLE
+local Title = Instance.new("TextLabel", Frame)
+Title.Size = UDim2.new(1,0,0,50)
+Title.Text = "🔑 KEY SYSTEM"
+Title.Font = Enum.Font.GothamBlack
+Title.TextSize = 26
+Title.TextColor3 = Color3.new(1,1,1)
+Title.BackgroundTransparency = 1
+
+-- TEXTBOX
+local TextBox = Instance.new("TextBox", Frame)
+TextBox.Size = UDim2.new(0,320,0,50)
+TextBox.Position = UDim2.new(0.5,-160,0,80)
+TextBox.PlaceholderText = "Enter your key"
+TextBox.Font = Enum.Font.Gotham
+TextBox.TextSize = 18
+TextBox.BackgroundColor3 = Color3.fromRGB(30,30,30)
+TextBox.TextColor3 = Color3.new(1,1,1)
+Instance.new("UICorner", TextBox)
+
+-- SUBMIT
+local Button = Instance.new("TextButton", Frame)
+Button.Size = UDim2.new(0,320,0,50)
+Button.Position = UDim2.new(0.5,-160,0,140)
+Button.Text = "SUBMIT"
+Button.Font = Enum.Font.GothamBold
+Button.TextSize = 20
+Button.BackgroundColor3 = Color3.fromRGB(0,170,255)
+Button.TextColor3 = Color3.new(1,1,1)
+Instance.new("UICorner", Button)
+
+-- GET KEY
+local GetKey = Instance.new("TextButton", Frame)
+GetKey.Size = UDim2.new(0,320,0,35)
+GetKey.Position = UDim2.new(0.5,-160,0,200)
+GetKey.Text = "GET KEY"
+GetKey.Font = Enum.Font.Gotham
+GetKey.TextSize = 16
+GetKey.BackgroundColor3 = Color3.fromRGB(50,50,50)
+GetKey.TextColor3 = Color3.new(1,1,1)
+Instance.new("UICorner", GetKey)
+
+GetKey.MouseButton1Click:Connect(function()
+	local link = "https://link-target.net/1392048/XO9XMKaxuk87"
+	if setclipboard then
+		setclipboard(link)
+	end
+	GetKey.Text = "LINK COPIED!"
+end)
+
+-- DRAG
+local dragging, dragStart, startPos
+Frame.InputBegan:Connect(function(i)
+	if i.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		dragStart = i.Position
+		startPos = Frame.Position
+	end
+end)
+UIS.InputChanged:Connect(function(i)
+	if dragging and i.UserInputType == Enum.UserInputType.MouseMovement then
+		local d = i.Position - dragStart
+		Frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset+d.X, startPos.Y.Scale, startPos.Y.Offset+d.Y)
+	end
+end)
+Frame.InputEnded:Connect(function(i)
+	if i.UserInputType == Enum.UserInputType.MouseButton1 then dragging=false end
+end)
+
+-- ================= HUB =================
+local function OpenHub()
+	Frame:Destroy()
+
+	local Hub = Instance.new("Frame", ScreenGui)
+	Hub.Size = UDim2.new(0,420,0,320)
+	Hub.Position = UDim2.new(0.5,-210,0.5,-160)
+	Hub.BackgroundColor3 = Color3.fromRGB(10,10,10)
+	Instance.new("UICorner", Hub)
+
+	local Stroke2 = Instance.new("UIStroke", Hub)
+	Stroke2.Thickness = 2
+
+	spawn(function()
+		while true do
+			for i=0,1,0.01 do
+				Stroke2.Color = Color3.fromHSV(i,1,1)
+				task.wait(0.03)
+			end
+		end
+	end)
+
+	local Title2 = Instance.new("TextLabel", Hub)
+	Title2.Size = UDim2.new(1,0,0,50)
+	Title2.Text = "🔥 SCRIPT HUB"
+	Title2.Font = Enum.Font.GothamBlack
+	Title2.TextSize = 26
+	Title2.TextColor3 = Color3.new(1,1,1)
+	Title2.BackgroundTransparency = 1
+
+	local List = Instance.new("Frame", Hub)
+	List.Size = UDim2.new(1,-20,1,-60)
+	List.Position = UDim2.new(0,10,0,50)
+	List.BackgroundTransparency = 1
+
+	local UIList = Instance.new("UIListLayout", List)
+	UIList.Padding = UDim.new(0,10)
+
+	-- 🔥 CREATE SCRIPT FUNCTION
+	local function CreateScript(name, code)
+		local Item = Instance.new("Frame", List)
+		Item.Size = UDim2.new(1,0,0,50)
+		Item.BackgroundColor3 = Color3.fromRGB(20,20,20)
+		Instance.new("UICorner", Item)
+
+		local Label = Instance.new("TextLabel", Item)
+		Label.Size = UDim2.new(0.6,0,1,0)
+		Label.Position = UDim2.new(0,10,0,0)
+		Label.Text = name
+		Label.Font = Enum.Font.GothamBold
+		Label.TextSize = 18
+		Label.TextColor3 = Color3.new(1,1,1)
+		Label.BackgroundTransparency = 1
+		Label.TextXAlignment = Enum.TextXAlignment.Left
+
+		local Run = Instance.new("TextButton", Item)
+		Run.Size = UDim2.new(0,60,0,40)
+		Run.Position = UDim2.new(1,-70,0.5,-20)
+		Run.Text = "▶"
+		Run.Font = Enum.Font.GothamBlack
+		Run.TextSize = 22
+		Run.BackgroundColor3 = Color3.fromRGB(25,25,25)
+		Run.TextColor3 = Color3.new(1,1,1)
+		Instance.new("UICorner", Run)
+
+		Run.MouseButton1Click:Connect(function()
+			TweenService:Create(Run, TweenInfo.new(0.3), {Rotation = 360}):Play()
+			Run.Text = "..."
+			task.wait(0.3)
+			ScreenGui:Destroy()
+			loadstring(code)()
+		end)
+	end
+
+	-- 🔥 สคริปที่มึงให้มา
+	CreateScript("Quantum HUB", [[
+loadstring(game:HttpGet("https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"))()
+]])
+
+	CreateScript("Trade Scam", [[
+loadstring(game:HttpGet("https://raw.githubusercontent.com/panumas13119/Dds/refs/heads/main/dupe"))()
+]])
+
+	CreateScript("RedZ HUB", [[
+loadstring(game:HttpGet("https://raw.githubusercontent.com/PlockScripts/newredz/refs/heads/main/Remake-version.luau"))()
+]])
+end
+
+-- CHECK KEY
+Button.MouseButton1Click:Connect(function()
+	if TextBox.Text == CorrectKey then
+		Button.Text = "SUCCESS!"
+		task.wait(0.5)
+		OpenHub()
+	else
+		Button.Text = "WRONG KEY"
+	end
+end)
