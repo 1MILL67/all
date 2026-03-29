@@ -1,8 +1,4 @@
--- ================= SCRIPT HUB =================
-local function OpenHub()
-	Frame:Destroy()
-
-	local Hub = Instance.new("Frame", ScreenGui)
+local Hub = Instance.new("Frame", ScreenGui)
 	Hub.Size = UDim2.new(0,420,0,320)
 	Hub.Position = UDim2.new(0.5,-210,0.5,-160)
 	Hub.BackgroundColor3 = Color3.fromRGB(10,10,10)
